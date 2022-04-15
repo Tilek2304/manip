@@ -109,13 +109,16 @@ void servoMove(int sNum, bool directionS){
   
   if(directionS && servos[sNum].read() < degree(sNum, true)){
     for(int i = servos[sNum].read();i<=degree(sNum, true);i++){
+       if(result.value == 0xD7D42191){
+          return;}
        servos[sNum].write(i);
        delay(5);
     }
   }
   else if(!directionS && servos[sNum].read() > degree(sNum, false)){
     for(int i = servos[sNum].read();i>=degree(sNum, false);i--){
-       servos[sNum].write(i);
+       if(result.value == 0xD7D42191){ return;}
+servos[sNum].write(i);
        delay(5);
     }
   }
